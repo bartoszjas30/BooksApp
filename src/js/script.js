@@ -9,6 +9,7 @@
     containerOf: {                      //tworzę referencję do .books-list
       booksList: '.books-list',
       bookImage: '.book__image',
+      bookImageId: '#data-id',
     },
   };
 
@@ -17,11 +18,11 @@
   }; //tutaj znajduję szablon
 
   const render = function(){
-    for (let book of dataSource.books){
+    for (let book of dataSource.books){       //tworzę pętle for let, aby przejść po elementach
 
       /* generate HTML based on template */
 
-      const generatedHTML = template.book(book);
+      const generatedHTML = template.book(book);      //generuję HTML
 
       /* generated DOM */
 
@@ -37,6 +38,26 @@
     }
   };
 
+  const favoriteBooks = [];
+
+  function initActions(){
+
+    const elementsOfBooks = document.querySelectorAll(select.containerOf.bookImage);
+
+    for(let elementBook of elementsOfBooks){
+      elementBook.addEventListener('dblclick', function(event){
+        event.preventDefault;
+        elementBook.classList.add('favorite');
+        const bookId = elementBook.getAttribute(select.containerOf.bookImageId);
+
+        favoriteBooks.push(bookId);
+
+      });
+    }
+
+  };
+
 
   render();
+  initActions(favoriteBooks);
 }
