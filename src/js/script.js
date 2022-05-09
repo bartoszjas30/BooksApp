@@ -47,16 +47,24 @@
     for(let elementBook of elementsOfBooks){
       elementBook.addEventListener('dblclick', function(event){
         event.preventDefault;
-        elementBook.classList.add('favorite');
-        const bookId = elementBook.getAttribute(select.containerOf.bookImageId);
 
-        favoriteBooks.push(bookId);
+        const bookId = elementBook.getAttribute(select.containerOf.bookImageId);
+        let index = favoriteBooks.indexOf(bookId);
+        if(index == -1){
+          elementBook.classList.add('favorite');
+          favoriteBooks.push(bookId);
+        }else {
+          elementBook.classList.remove('favorite');
+          favoriteBooks.splice(index, 1);
+
+        }
+
+
 
       });
     }
 
-  };
-
+  }
 
   render();
   initActions(favoriteBooks);
